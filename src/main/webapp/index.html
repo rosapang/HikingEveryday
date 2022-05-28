@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- Viewport control for mobile devices -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Hiking Trails Recommendation">
+		<meta name="author" content="Hiking Everyday">
+		<title>Hiking Everyday</title>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  		<link rel="stylesheet" href="styles/main.css">
+	</head>
+
+	<body>
+		<header class="top-header">
+			<nav class="top-nav">
+				<button id="home-btn">Home</button>
+			</nav>
+			<span id="welcome-msg">Welcome to HikingEveryday</span>
+			<button id="profile-btn">Profile</button>
+			<i id="avatar" class="avatar fa fa-user fa-2x"></i>
+	  	</header>
+
+		<div class="container">
+			<header>
+				<p>
+					<span>Trail</span>
+					<br/>Hiking Everyday
+				</p>
+			</header>
+
+			<section class = "main-section">
+
+ 				<div id="profile-form">
+					<form>
+            			<label for="name">Name:</label><br>
+            			<input type="text" id="user-name" name="name" value="Preferred name"><br><br>
+            			<label for="age">Age:</label><br>
+            			<input type="number" min="0" id="age" name="age"><br><br>
+            			<label for="gender">Gender:</label><br>
+            			<select id="gender" name="gender">
+            				<option value="0">Please select</option>
+                			<option value="male">Male</option>
+                			<option value="female">Female</option>
+                			<option value="other">Other</option>
+                			<option value="nosay">Prefer not to say</option>
+            			</select>
+            			<br><br>
+            			<label for="exercise">How many times per week would you exercise? (Each exercise over 20 mins)</label><br>
+            			<select id="exercise" name="exercise">
+            				<option value="0">Please select</option>
+                    		<option value="4">Everyday(Almost)</option>
+                    		<option value="3">2 - 3 days per week</option>
+                    		<option value="2">Once per week</option>
+                    		<option value="1">Rarely or never</option>
+            			</select>
+            			<br><br>
+            			<label for="joint">Do you think you have joint problem?</label><br>
+            			<select id="joint" name="joint">
+            				<option value="0">Choose Yes or No</option>
+                    		<option value="-1">Yes</option>
+                    		<option value="0">No</option>
+            			</select>
+            			<br><br>
+            			<label for="obese">Do you think you overweight or obese?</label><br>
+            			<select id="obese" name="obese">
+            				<option value="0">Choose Yes or No</option>
+                    		<option value="-1">Yes</option>
+                    		<option value="0">No</option>
+            			</select>
+            			
+            			<br><br>
+        			</form>
+
+        			<input id="calc-btn" type="button" value="Calculate" onclick="calculateLevel();">
+        			<p>If you click the "Calculate" button, recommended trail level will appear.</p>
+        			<br>
+        			<label><b>Hi, <span id="displayName">____</span></b></label>
+        			<br>
+        			<label><b>Recommended trail level is: </b></label>
+        			<h3><mark><span id='displayLevel'></span></mark></h3>
+        			<h3><mark><span id='levelReason'></span></mark></h3>
+        			<p id="register-result"></p>
+	        	</div>
+
+				<div id="search-form">
+                	<label for="address">Enter ZIP code or city:</label>
+                	<input id="address" name="address" type="text" title="5-digit ZIP code or city name" placeholder="5-digit ZIP code or city name">
+                	<button id="search-btn">Search</button>
+                </div>
+
+				<aside id="item-nav">
+					<div class="nav-icon">
+						<i class="fa fa-sitemap fa-2x"></i>
+					</div>
+					<nav class="main-nav">
+						<a href="#" id="nearby-btn" class="main-nav-btn active">
+							<i class="fa fa-map-marker"></i> Nearby
+						</a>
+						<a href="#" id="recommend-btn" class="main-nav-btn">
+           	 				<i class="fa fa-thumbs-up"></i> Just For You
+          				</a>
+					</nav>
+				</aside>
+
+				<ul id="item-list">
+					<li class="item">
+					<img alt="item image" src="https://cdn2.apstatic.com/photos/hike/7039883_smallMed_1555092747.jpg"/>
+					<div>
+						<a class="item-name" href="#">Trial</a>
+						<p class="item-category">black</p>
+						<div class="stars">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						</div>
+					</div>
+					<p class="item-address">Superior, Colorado</p>
+					</li>
+			  	</ul>
+
+				<div id="myModal" class="modal">
+					<div class="modal-content">
+						<div class="modal-header">
+							<span class="close">&times;</span>
+							<!-- Collapse begin here-->
+							<h4>Customize Your Trail</h4>
+							<input type="checkbox" id="Enable-Filter" name="Enable-Filter" data-check="false">
+							<label for="Enable-Filter" class="btn btn-primary filterToggle"> Click to Enable Filter</label><br>
+						</div>
+
+						<div class="collapse">
+							<div class="container">
+								<p>How do you want to feel? (Optional)</p>
+								<div class="btn-group">
+									<button type="button" id="Chill-btn" class="btn btn-primary" value='Chill'>Chill</button>
+									<button type="button" id="Challenge-btn" class="btn btn-primary" value='Challenge'>Challenge</button>
+									<button type="button" id="Exhausted-btn" class="btn btn-primary" value='Exhausted'>Exhausted</button>
+									<button type="button" id="Myfitness-btn" class="btn btn-primary" value='default'>My Fitness Level</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button id="submit-filter" type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> SAVE</button>
+						</div>
+					</div>
+				</div>
+				
+			</section>
+		</div>
+
+		<footer>
+			<p class="title">What We Do</p>
+			<p> "Help you find the best trails around."</p>
+		</footer>
+
+		<script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSvtEPfdFmrBTOZdwkxk_WsQAslJogFxA&callback=initMap&libraries=&v=weekly&language=en&region=US" defer></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script src="scripts/utils.js"></script>
+  		<script src="scripts/apis.js"></script>
+  		<script src="scripts/main.js"></script>
+
+	</body>
+</html>
